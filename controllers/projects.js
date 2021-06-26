@@ -17,6 +17,22 @@ export const getProjects = async (req, res) => {
     }
 }
 
+export const getProject = async (req, res) => {
+    try {
+        const project = await Project.findById(req.params.projectId).populate('task')
+        res.status(200).json({
+            success: true,
+            data: project,
+            count: 1
+        })
+    } catch (error) {
+        res.status(404).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
 export const createProject = async (req, res) => {
     const project = req.body
     const newProject = new Project(project)
