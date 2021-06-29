@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import morgan from 'morgan'
+import cors from 'cors'
 import connectDB from './config/db.js'
 import projectRoutes from './routes/projects.js'
 import taskRoutes from './routes/tasks.js'
@@ -18,6 +19,7 @@ const app = express()
 // Body Parser
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
+app.use(cors())
 
 // Logging
 if (process.env.NODE_ENV === 'development') {
