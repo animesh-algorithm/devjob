@@ -22,6 +22,7 @@ export const createProject = (project) => async (dispatch) => {
             type: CREATE_PROJECT,
             payload: data
         }
+        dispatch(action)
     } catch (error) {
         console.error(error)
     }

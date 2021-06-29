@@ -10,10 +10,10 @@ const Projects = () => {
     const projects = useSelector((state) => state.projects)
     useEffect(() => {
       dispatch(getProjects())
-    }, [dispatch])
+    }, [projects, dispatch])
 
     return (
-        <div className="row">
+        <div className="row justify-content-center">
             {
                 projects.data && projects.data.map(project => <Project project={project} key={project._id}/> )
             }

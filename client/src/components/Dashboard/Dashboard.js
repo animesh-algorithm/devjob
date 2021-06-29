@@ -5,7 +5,7 @@ import { Button } from "@material-ui/core"
 const Dashboard = () => {
     return (
         <div className="container">
-            <h1 className='display-1'>Dashboard</h1>
+            <h1 className='display-2'>Dashboard</h1>
             <Button component={Link} to='/projects/create' variant='contained' className='card'>Create New Project</Button>
             <br /><br />
             <Projects />
