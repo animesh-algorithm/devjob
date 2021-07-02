@@ -5,9 +5,10 @@ import { getProjects } from '../../actions/projects';
 import './styles.css'
 import Project from '../Project/Project';
 
-const Projects = () => {
+const Projects = ({currentProjectId, setCurrentProjectId}) => {
     const dispatch = useDispatch()
     const projects = useSelector((state) => state.projects)
+
     useEffect(() => {
       dispatch(getProjects())
     }, [projects, dispatch])
@@ -15,7 +16,7 @@ const Projects = () => {
     return (
         <div className="row justify-content-center">
             {
-                projects.data && projects.data.map(project => <Project project={project} key={project._id}/> )
+                projects.data && projects.data.map(project => <Project project={project} key={project._id} currentProjectId={currentProjectId} setCurrentProjectId={setCurrentProjectId} /> )
             }
         </div>
     )
