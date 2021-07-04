@@ -6,7 +6,7 @@ const router = express.Router()
 router
     .get('/', getAllTasks)
     .get('/:projectId', getTasksForAProject)
-    .post('/:projectId', createTask)
+    .post('/:projectId/create', createTask)
     .post('/:projectId/:taskId/delete', deleteTask)
 
 export default router
