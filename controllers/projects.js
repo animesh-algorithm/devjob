@@ -1,4 +1,5 @@
 import Project from '../models/Project.js'
+import Task from '../models/Task.js'
 import mongoose from 'mongoose'
 
 export const getProjects = async (req, res) => {
@@ -60,7 +61,18 @@ export const deleteProject = async (req, res) => {
         })
     }
     try {
+        const tasks = await Task.find({ project: projectId })
+        tasks.forEach(async (task) => {
+            if (!mongoose.Types.ObjectId.isValid(task._id)) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'Task not found!'
+                })
+            }
+            await Task.findByIdAndRemove(task._id)
+        })
         await Project.findByIdAndRemove(projectId)
+
         res.json({
             success: true,
             message: 'Project Successfully Deleted'
