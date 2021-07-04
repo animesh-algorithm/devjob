@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import Task from '../models/Task.js'
 
 export const getAllTasks = async (req, res) => {
@@ -47,6 +48,29 @@ export const createTask = async (req, res) => {
         })
     } catch (error) {
         res.status(409).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+export const deleteTask = async (req, res) => {
+    const { taskId } = req.params
+    console.log(req.params)
+    if (!mongoose.Types.ObjectId.isValid(taskId)) {
+        return res.status(404).json({
+            success: false,
+            message: 'Task not found!'
+        })
+    }
+    try {
+        await Task.findByIdAndRemove(taskId)
+        res.json({
+            success: true,
+            message: 'Task Successfully Deleted'
+        })
+    } catch (error) {
+        res.status(404).json({
             success: false,
             message: error.message
         })

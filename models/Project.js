@@ -20,7 +20,6 @@ const ProjectSchema = new mongoose.Schema({
         lowercase: true,
         trim: true
     },
-    features: [String],
     deadline: Date
 })
 
