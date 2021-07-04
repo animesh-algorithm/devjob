@@ -1,16 +1,18 @@
 import moment from 'moment';
 import { Button } from "@material-ui/core"
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteProject } from '../../actions/projects';
 
 const Project = ({ project, currentProjectId, setCurrentProjectId }) => {
     const dispatch = useDispatch()
+    const tasks = useSelector(state => state.tasks)
 
     const handleDelete = () => {
         dispatch(deleteProject(project._id))
     }
     const handleEdit = () => {
+        console.log(currentProjectId)
         setCurrentProjectId(project._id)
     }
 
@@ -21,6 +23,9 @@ const Project = ({ project, currentProjectId, setCurrentProjectId }) => {
                 <Button component={Link} className='card m-1' to='/projects/edit' variant='contained' onClick={handleEdit}>Edit</Button>
                 <Button className='card m-1' variant='contained' onClick={handleDelete}>Delete</Button>
             </div>        
+            <div className="container">
+                <Button component={Link} className='card m-1' to='/projects/tasks/create' variant='contained' onClick={handleEdit}>Create New Tasks</Button>
+            </div>
             <ul className='text-left card-text'>
                     {
                         project.features && project.features.map((feature, i) => (
